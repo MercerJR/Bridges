@@ -5,6 +5,7 @@ import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.protobuf.ProtobufDecoder;
 import io.netty.handler.codec.protobuf.ProtobufEncoder;
+import test.Test;
 
 /**
  * @Author: Mercer JR
@@ -15,7 +16,7 @@ public class ClientChannelInitializer extends ChannelInitializer<SocketChannel> 
     protected void initChannel(SocketChannel socketChannel) throws Exception {
         ChannelPipeline pipeline = socketChannel.pipeline();
         pipeline.addLast("encoder",new ProtobufEncoder());
-        pipeline.addLast("decoder",new ProtobufDecoder(null));
+        pipeline.addLast("decoder",new ProtobufDecoder(Test.Person.getDefaultInstance()));
         pipeline.addLast(new ClientHandler());
     }
 }
